@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Pistol
+  - vcam
   layers:
   - Default
   - TransparentFX

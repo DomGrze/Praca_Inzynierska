@@ -18,7 +18,7 @@ public class Bullet_Shotgun : MonoBehaviour
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
         Debug.Log(hitInfo.name);
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
+        Enemy_Tank enemy = hitInfo.GetComponent<Enemy_Tank>();
         PlayerMovement player = hitInfo.GetComponent<PlayerMovement>();
         if (enemy != null)
         {

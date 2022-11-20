@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 10f;
     public int health = 100;
     private bool isFacingRight = true;
+    private bool doubleJump=false;
     public Animator animator;
 
     [SerializeField] private Rigidbody2D rb;
@@ -18,9 +19,15 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if(IsGrounded())
+        {
+            doubleJump = false;
+        }
+
+        if (Input.GetButtonDown("Jump") && (IsGrounded() || (doubleJump==false)))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            doubleJump = !doubleJump;
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)

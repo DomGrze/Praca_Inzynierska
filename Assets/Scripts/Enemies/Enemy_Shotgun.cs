@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooting : MonoBehaviour
+public class Enemy_Shotgun : MonoBehaviour
 {
     private GameObject player;
     public GameObject bullet;
     public Transform firePoint;
-    private float timer;
+    private float timer=0f;
     void Start()
     {
         
@@ -34,6 +34,8 @@ public class EnemyShooting : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullet, firePoint.position, Quaternion.identity);//tworzymy pocisk z punktu firePoint
+        Instantiate(bullet, firePoint.position, firePoint.rotation * Quaternion.Euler(0f,0f,12f));
+        Instantiate(bullet, firePoint.position, firePoint.rotation);
+        Instantiate(bullet, firePoint.position, firePoint.rotation * Quaternion.Euler(0f,0f,-12f));
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class Weapon_Shotgun : MonoBehaviour
 {
     public Transform firePoint;
+    public Transform pistolPos;
     public GameObject bulletPrefab;
+    public GameObject pistol;
     private float timer=0f;
     private int ammo=18;
     private int clip=6;
@@ -27,8 +29,15 @@ public class Weapon_Shotgun : MonoBehaviour
             }
             else if((ammo==0) && (clip==0))
             {
+                Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+
                 Destroy(gameObject);
             }
+        }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            Destroy(gameObject);
         }
     }
 

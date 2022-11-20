@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class Enemy : MonoBehaviour {
+public class Enemy_Tank : MonoBehaviour {
 
-	public int health = 100;
+	private int health = 200;
 
 	public AIPath aiPath;
 

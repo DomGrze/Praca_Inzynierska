@@ -26,6 +26,11 @@ public class Weapon_Flamethrower : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            Destroy(gameObject);
+        }
     }
 
     void Shoot()

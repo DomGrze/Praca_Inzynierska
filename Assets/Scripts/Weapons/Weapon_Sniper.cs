@@ -5,22 +5,31 @@ using Cinemachine;
 
 public class Weapon_Sniper : MonoBehaviour
 {
-    public CinemachineVirtualCamera vcam;
+    private Camera Camera;
+    private CinemachineVirtualCamera vcam;
     public Transform firePoint;
     public Transform pistolPos;
     public GameObject bulletPrefab;
     public GameObject pistol;
     private float timer=0f;
-    private int ammo=0;
-    private int clip=4;
+    private int ammo=21;
+    private int clip=7;
+
+
+    private void Start() 
+    {
+        Camera = Camera.main;
+        vcam = Camera.GetComponent<CinemachineVirtualCamera>();
+        vcam.m_Lens.OrthographicSize = 8f;
+    }
+
 
     void Update()
     {
-        vcam.m_Lens.OrthographicSize = 8f;
         timer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetButtonDown("Fire1") && (timer > 1.5f))
         {
-            if(clip>0 && timer > 2f)
+            if(clip>0)
             {
                 timer=0f;
                 clip-=1;
@@ -37,6 +46,12 @@ public class Weapon_Sniper : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if(Input.GetKeyDown(KeyCode.Q))
+            {
+                vcam.m_Lens.OrthographicSize = 5f;
+                Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+                Destroy(gameObject);
+            }
     }
     void Shoot()
     {
