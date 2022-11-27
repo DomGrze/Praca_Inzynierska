@@ -10,10 +10,11 @@ public class Weapon_Sniper : MonoBehaviour
     public Transform firePoint;
     public Transform pistolPos;
     public GameObject bulletPrefab;
-    public GameObject pistol;
+    private GameObject pistol;
+    private AmmoBar ammoBar;
     private float timer=0f;
-    private int ammo=21;
-    private int clip=7;
+    private int ammo;
+    private int clip;
 
 
     private void Start() 
@@ -21,6 +22,12 @@ public class Weapon_Sniper : MonoBehaviour
         Camera = Camera.main;
         vcam = Camera.GetComponent<CinemachineVirtualCamera>();
         vcam.m_Lens.OrthographicSize = 8f;
+        pistol = GameObject.FindGameObjectWithTag("Pistol");
+        pistol.SetActive(false);
+        ammoBar = Object.FindObjectOfType<AmmoBar>();
+        ammo = 21;
+        clip = 7;
+        ammoBar.SetMaxAmmo(ammo,clip);
     }
 
 
@@ -33,25 +40,30 @@ public class Weapon_Sniper : MonoBehaviour
             {
                 timer=0f;
                 clip-=1;
+                ammoBar.SetMaxAmmo(ammo,clip);
                 Shoot();
             }
             else if(clip==0 && ammo>0)
             {
                 Reload();
             }
-            else if((ammo==0) && (clip==0))
-            {
-                vcam.m_Lens.OrthographicSize = 5f;
-                Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
-                Destroy(gameObject);
-            }
+        }
+        if((ammo==0) && (clip==0))
+        {
+            pistol.SetActive(true);
+            vcam.m_Lens.OrthographicSize = 5f;
+            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            Destroy(gameObject);
+            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
-            {
-                vcam.m_Lens.OrthographicSize = 5f;
-                Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
-                Destroy(gameObject);
-            }
+        {
+            pistol.SetActive(true);
+            vcam.m_Lens.OrthographicSize = 5f;
+            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            Destroy(gameObject);
+            pistol.SetActive(false);
+        }
     }
     void Shoot()
     {
@@ -59,15 +71,20 @@ public class Weapon_Sniper : MonoBehaviour
     }
     void Reload()
     {
-        if(ammo<7)
+        timer += Time.deltaTime;
+        if(ammo<7 && timer>2f)
         {
+            timer=0;
             clip=ammo;
             ammo=0;
+            ammoBar.SetMaxAmmo(ammo,clip);
         }
-        if(ammo>7)
+        if(ammo>=7)
         {
-        ammo-=clip;
-        clip=7;
+            timer=0;
+            clip=7;
+            ammo-=clip;
+            ammoBar.SetMaxAmmo(ammo,clip);
         }
     }
 }

@@ -7,11 +7,20 @@ public class Weapon_Machinegun : MonoBehaviour
     public Transform firePoint;
     public Transform pistolPos;
     public GameObject bulletPrefab;
-    public GameObject pistol;
+    private GameObject pistol;
+    private AmmoBar ammoBar;
     private float timer=0f;
-    private int ammo=90;
-    private int clip=30;
-
+    private int ammo;
+    private int clip;
+    void Start()
+    {
+        pistol = GameObject.FindGameObjectWithTag("Pistol");
+        pistol.SetActive(false);
+        ammoBar = Object.FindObjectOfType<AmmoBar>();
+        ammo = 90;
+        clip = 30;
+        ammoBar.SetMaxAmmo(ammo,clip);
+    }
     void Update()
     {
         timer += Time.deltaTime;
@@ -21,22 +30,27 @@ public class Weapon_Machinegun : MonoBehaviour
             {
                 timer=0f;
                 clip-=1;
+                ammoBar.SetMaxAmmo(ammo,clip);
                 Shoot();
             }
             else if(clip==0 && ammo>0)
             {
                 Reload();
             }
-            else if((ammo==0) && (clip==0))
-            {
-                Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
-                Destroy(gameObject);
-            }
+        }
+        if((ammo==0) && (clip==0))
+        {
+            pistol.SetActive(true);
+            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            Destroy(gameObject);
+            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
+            pistol.SetActive(true);
             Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
+            pistol.SetActive(false);
         }
     }
 
@@ -46,15 +60,20 @@ public class Weapon_Machinegun : MonoBehaviour
     }
     void Reload()
     {
-        if(ammo<30)
+        timer += Time.deltaTime;
+        if(ammo<30 && timer>2f)
         {
+            timer=0;
             clip=ammo;
             ammo=0;
+            ammoBar.SetMaxAmmo(ammo,clip);
         }
-        if(ammo>30)
+        if(ammo>=30 && timer>2f)
         {
-        ammo-=clip;
-        clip=30;
+            timer=0;
+            clip=30;
+            ammo-=clip;
+            ammoBar.SetMaxAmmo(ammo,clip);
         }
     }
 }

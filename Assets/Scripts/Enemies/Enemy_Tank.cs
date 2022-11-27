@@ -8,12 +8,19 @@ public class Enemy_Tank : MonoBehaviour {
 	private int health = 200;
 
 	public AIPath aiPath;
+	//public HealthBar healthBar;
 
 	//public GameObject deathEffect;
+	void Start()
+	{
+		//healthBar.SetMaxHealth(health);
+		//healthBar.SetHealth(health);
+	}
 
 	public void TakeDamage (int damage)
 	{
 		health -= damage;
+		//healthBar.SetHealth(health);
 
 		if (health <= 0)
 		{

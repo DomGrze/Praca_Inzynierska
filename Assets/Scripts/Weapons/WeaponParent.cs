@@ -18,7 +18,7 @@ public class WeaponParent : MonoBehaviour
         Camera = Camera.main;
     }
     private void Update() {
-        Vector2 mouse = Input.mousePosition;//wczytujemy ruchy myszki
+        Vector2 mouse = Input.mousePosition;//wczytuje ruchy myszki
 
         Vector2 screenPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouse) - (Vector2)transform.position;//miejsce w którym aktualnie znajduje się kursor
 
@@ -26,7 +26,7 @@ public class WeaponParent : MonoBehaviour
 
         float angle = Mathf.Atan2(screenPoint.y, screenPoint.x) * Mathf.Rad2Deg;//ustalanie kąta pomiędzy graczem a kursorem, w stopniach
 
-        transform.rotation = Quaternion.Euler(0f,0f,angle);//ustalamy kierunek strzału(obrót broni)
+        transform.rotation = Quaternion.Euler(0f,0f,angle);//ustalam kierunek strzału(obrót broni)
         
         //ta część kodu odpowiada za obrót modelu broni i postaci w kierunku kursora
         if(transform.rotation.z >= 0.7f || transform.rotation.z <= -0.7f)

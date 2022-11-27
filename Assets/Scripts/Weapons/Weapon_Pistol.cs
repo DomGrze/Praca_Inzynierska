@@ -11,13 +11,22 @@ public class Weapon_Pistol : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    private GameObject pistol;
     private float timer=0f;
     private int ammo=999;
     //jako domyślna broń, pistolet będzie miał nielimitowane naboje
     //mogłaby być tu dowolna liczba, nie ma to znaczenia
     //jednak 999 na HUDzie gracza ma symbolizować niekończącą się amunicję
     private int clip=12;//Nadal będzie posiadał magazynek
+    private AmmoBar ammoBar;
 
+    void Start() 
+    {
+        // pistol = GameObject.FindGameObjectWithTag("Pistol");
+        // pistol.SetActive(false);
+        ammoBar = Object.FindObjectOfType<AmmoBar>();
+        ammoBar.SetMaxAmmo(ammo, clip);
+    }
     void Update()
     {
         timer += Time.deltaTime;
@@ -27,15 +36,15 @@ public class Weapon_Pistol : MonoBehaviour
             {
                 timer=0f;
                 clip-=1;
+                ammoBar.SetMaxAmmo(ammo,clip);
                 Shoot();
             }
-            else if(clip<=0)
-            {
-                clip=12;
-            }
+        }
+        if (clip<=0)
+        {
+            clip=12;
         }
     }
-
     void Shoot()
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);

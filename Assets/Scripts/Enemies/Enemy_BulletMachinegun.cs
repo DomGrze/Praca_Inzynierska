@@ -6,13 +6,9 @@ public class Enemy_BulletMachinegun : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
-
     private float speed = 20f;//szybkość pocisku
-
     private int damage = 15;//obrażenia pocisku
-
     private float timeAlive = 3f;//max czas lotu pocisku
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +25,6 @@ public class Enemy_BulletMachinegun : MonoBehaviour
 
         Destroy(gameObject, timeAlive);//pocisk wystrzelony w powietrze zniknie po czasie ustalonym w timeAlive
     }
-
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
         PlayerMovement player = hitInfo.GetComponent<PlayerMovement>();//wyszukuje komponent w którym mam hp gracza
@@ -37,13 +32,11 @@ public class Enemy_BulletMachinegun : MonoBehaviour
         {
             player.TakeDamage(damage);//gdy pocisk zderzy się z graczem zadaje mu obrażenia
         }
-        
         // if (hitInfo.name != "Enemy_Tank" && hitInfo.name != "EnemyBullet(Clone)" && hitInfo.name != "Bullet_Pistol(Clone)")
         // {
         //     Destroy(gameObject);
         // }
     }
-
     void Update()
     {
         

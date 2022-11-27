@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static AmmoBar;
 public class Weapon_Shotgun : MonoBehaviour
 {
     public Transform firePoint;
     public Transform pistolPos;
     public GameObject bulletPrefab;
-    public GameObject pistol;
+    private GameObject pistol;
+    private AmmoBar ammoBar;
     private float timer=0f;
-    private int ammo=18;
-    private int clip=6;
-
+    private int ammo;
+    private int clip;
+    void Start()
+    {
+        pistol = GameObject.FindGameObjectWithTag("Pistol");
+        pistol.SetActive(false);
+        ammoBar = Object.FindObjectOfType<AmmoBar>();
+        ammo = 1;
+        clip = 1;
+        ammoBar.SetMaxAmmo(ammo,clip);
+    }
     void Update()
     {
         timer += Time.deltaTime;
@@ -21,26 +30,29 @@ public class Weapon_Shotgun : MonoBehaviour
             {
                 timer=0f;
                 clip-=1;
+                ammoBar.SetAmmoClip(clip);
                 Shoot();
             }
-            else if(clip==0 && ammo>0)
-            {
-                Reload();
-            }
-            else if((ammo==0) && (clip==0))
-            {
-                Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
-
-                Destroy(gameObject);
-            }
+        }
+        if(clip==0 && ammo>0)
+        {
+            Reload();
+        }
+        if((ammo==0) && (clip==0))
+        {
+            pistol.SetActive(true);
+            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            Destroy(gameObject);
+            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
+            pistol.SetActive(true);
             Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
+            pistol.SetActive(false);
         }
     }
-
     void Shoot()
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(0f,0f,12f));
@@ -48,18 +60,22 @@ public class Weapon_Shotgun : MonoBehaviour
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(0f,0f,-12f));
         //Shotgun strzela trzema pociskami z rozproszeniem
     }
-
     void Reload()
     {
-        if(ammo<6)
+        timer+=Time.deltaTime;
+        if(ammo<6 && timer>2f)
         {
+            timer=0;
             clip=ammo;
             ammo=0;
+            ammoBar.SetMaxAmmo(ammo,clip);
         }
-        if(ammo>6)
+        if(ammo>=6 && timer>2f)
         {
-        ammo-=clip;
-        clip=6;
+            timer=0;
+            clip=6;
+            ammo = ammo-clip;
+            ammoBar.SetMaxAmmo(ammo,clip);
         }
     }
 }

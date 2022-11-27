@@ -144,6 +144,7 @@ MonoBehaviour:
   pistolPos: {fileID: 276715354292748761}
   bulletPrefab: {fileID: 4386568982038457855, guid: ac301f3c2b1306a4690a3dfc90e518b8, type: 3}
   pistol: {fileID: 5795646615006944145, guid: 65ea5604da98a784ca700d097d9a07ce, type: 3}
+  ammoBar: {fileID: 2090576359158000817, guid: c89dc88781183284f9e0091a02fa3b1c, type: 3}
 --- !u!1 &5404910783926890057
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class Enemy_Machinegun : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
     private float timer=0f;
-    private int clip=30;
+    private int clip=20;
     void Start()
     {
         
@@ -24,7 +24,7 @@ public class Enemy_Machinegun : MonoBehaviour
         {
             timer += Time.deltaTime;//liczenie czasu pomiędzy kolejnymi strzałami
 
-            if(timer > 0.2 && clip > 0)//jeśli minął ten czas, można strzelać
+            if(timer > 0.3 && clip > 0)//jeśli minął ten czas, można strzelać
             {
                 timer = 0;//resetujemy czas
                 clip -= 1;
@@ -32,7 +32,7 @@ public class Enemy_Machinegun : MonoBehaviour
             }
             else if(timer > 3 && clip == 0)
             {
-                clip = 30;
+                clip = 20;
             }
         }
     }
