@@ -12,7 +12,10 @@ public class Weapon_Pistol : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     private GameObject pistol;
-    private float timer=0f;
+    private AudioSource shoot;
+    public AudioSource reload;
+    private float timer=1f;
+    private float timerR=0f;
     private int ammo=999;
     //jako domyślna broń, pistolet będzie miał nielimitowane naboje
     //mogłaby być tu dowolna liczba, nie ma to znaczenia
@@ -22,8 +25,7 @@ public class Weapon_Pistol : MonoBehaviour
 
     void Start() 
     {
-        // pistol = GameObject.FindGameObjectWithTag("Pistol");
-        // pistol.SetActive(false);
+        shoot = GetComponent<AudioSource>();
         ammoBar = Object.FindObjectOfType<AmmoBar>();
         ammoBar.SetMaxAmmo(ammo, clip);
     }
@@ -36,17 +38,28 @@ public class Weapon_Pistol : MonoBehaviour
             {
                 timer=0f;
                 clip-=1;
+                if(clip==0)
+                {
+                    reload.Play();
+                }
                 ammoBar.SetMaxAmmo(ammo,clip);
                 Shoot();
             }
         }
-        if (clip<=0)
+        if(clip<=0)
         {
-            clip=12;
+            timerR+=Time.deltaTime;
+            if(timerR > 1f)
+            {
+                timerR=0f;
+                clip=12;
+                ammoBar.SetMaxAmmo(ammo,clip);
+            }
         }
     }
     void Shoot()
     {
+        shoot.Play();
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }

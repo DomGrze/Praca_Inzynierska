@@ -12,13 +12,16 @@ public class Weapon_Sniper : MonoBehaviour
     public GameObject bulletPrefab;
     private GameObject pistol;
     private AmmoBar ammoBar;
-    private float timer=0f;
+    private AudioSource shoot;
+    public AudioSource reload;
+    private float timer=2f;
+    private float timerR=0f;
     private int ammo;
     private int clip;
-
-
+    
     private void Start() 
     {
+        shoot = GetComponent<AudioSource>();
         Camera = Camera.main;
         vcam = Camera.GetComponent<CinemachineVirtualCamera>();
         vcam.m_Lens.OrthographicSize = 8f;
@@ -29,26 +32,29 @@ public class Weapon_Sniper : MonoBehaviour
         clip = 7;
         ammoBar.SetMaxAmmo(ammo,clip);
     }
-
-
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && (timer > 1.5f))
+        if (Input.GetButtonDown("Fire1"))
         {
-            if(clip>0)
+            if(clip>0 && (timer > 1.7f))
             {
                 timer=0f;
                 clip-=1;
+                reload.Play();
+                if(clip==0 && ammo>0)
+                {
+                    reload.Play();
+                }
                 ammoBar.SetMaxAmmo(ammo,clip);
                 Shoot();
             }
-            else if(clip==0 && ammo>0)
-            {
-                Reload();
-            }
         }
-        if((ammo==0) && (clip==0))
+        if(clip==0 && ammo>0)
+        {
+            Reload();
+        }
+        if((ammo==0) && (clip==0) && timer>1f)
         {
             pistol.SetActive(true);
             vcam.m_Lens.OrthographicSize = 5f;
@@ -67,21 +73,22 @@ public class Weapon_Sniper : MonoBehaviour
     }
     void Shoot()
     {
+        shoot.Play();
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
     void Reload()
     {
-        timer += Time.deltaTime;
-        if(ammo<7 && timer>2f)
+        timerR+= Time.deltaTime;
+        if(ammo<7 && timerR>2f)
         {
-            timer=0;
+            timerR=0;
             clip=ammo;
             ammo=0;
             ammoBar.SetMaxAmmo(ammo,clip);
         }
-        if(ammo>=7)
+        if(ammo>=7 && timerR>2f)
         {
-            timer=0;
+            timerR=0;
             clip=7;
             ammo-=clip;
             ammoBar.SetMaxAmmo(ammo,clip);

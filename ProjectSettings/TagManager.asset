@@ -7,6 +7,8 @@ TagManager:
   - Bullet
   - Pistol
   - vcam
+  - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -17,15 +17,12 @@ public class Bullet_Machinegun : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        Debug.Log(hitInfo.name);
         Enemy_Tank enemy = hitInfo.GetComponent<Enemy_Tank>();
-
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
         }
-
-        if (hitInfo.name != "Player" && hitInfo.name != "EnemyBullet(Clone)" && hitInfo.name != "Bullet_Machinegun(Clone)")
+        if (hitInfo.CompareTag("Enemy") || hitInfo.CompareTag("Ground"))
         {
             Destroy(gameObject);
         }

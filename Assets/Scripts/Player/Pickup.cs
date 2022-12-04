@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Pickup : MonoBehaviour
 {
     public Text pickupText;
     private bool pickable;
-    private float timer=0;
     public GameObject weapon;
+    private Camera Camera;
+    private CinemachineVirtualCamera vcam;
     private GameObject weaponSpawn;
     private GameObject player;
-    private GameObject pistol;
+    public GameObject pistol;
     private WeaponParent prevWeapon;
     private WeaponParent weaponParent;
     private void Start()
     {
         pistol = GameObject.FindGameObjectWithTag("Pistol");
         pickupText.gameObject.SetActive(false);
+        Camera = Camera.main;
+        vcam = Camera.GetComponent<CinemachineVirtualCamera>();
     }
     private void Update()
     {
@@ -35,6 +39,7 @@ public class Pickup : MonoBehaviour
         {
             pickupText.gameObject.SetActive(true);
             pickable = true;
+            pistol.SetActive(true);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -43,20 +48,19 @@ public class Pickup : MonoBehaviour
         {
             pickupText.gameObject.SetActive(false);
             pickable = false;
+            pistol.SetActive(false);
         }
     }
     void PickUp()
     {
-        pistol.SetActive(true);
+        // pistol.SetActive(true);
         Destroy(prevWeapon.gameObject);
-        weaponSpawn = Instantiate(weapon.gameObject,weaponParent.transform.position,weaponParent.transform.rotation);
+        weaponSpawn = Instantiate(weapon.gameObject,weaponParent.transform.parent.position,weaponParent.transform.parent.rotation);
         weaponSpawn.gameObject.transform.SetParent(weaponParent.transform.parent);
         //Destroy(gameObject); na czas testow nie usuwam podnoszonej broni
-        timer+=Time.deltaTime;
-        if(timer>0.5f)
+        if(vcam.m_Lens.OrthographicSize != 5f)
         {
-            timer=0;
-            pistol.SetActive(false);
+            vcam.m_Lens.OrthographicSize = 5f;
         }
     }
 }

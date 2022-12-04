@@ -17,7 +17,6 @@ public class Bullet_Flamethrower : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        Debug.Log(hitInfo.name);
         Enemy_Tank enemy = hitInfo.GetComponent<Enemy_Tank>();
         if (enemy != null)
         {

@@ -9,11 +9,15 @@ public class Weapon_Shotgun : MonoBehaviour
     public GameObject bulletPrefab;
     private GameObject pistol;
     private AmmoBar ammoBar;
-    private float timer=0f;
+    private AudioSource shoot;
+    public AudioSource reload;
+    private float timer=2f;
+    private float timerR=0f;
     private int ammo;
     private int clip;
     void Start()
     {
+        shoot = GetComponent<AudioSource>();
         pistol = GameObject.FindGameObjectWithTag("Pistol");
         pistol.SetActive(false);
         ammoBar = Object.FindObjectOfType<AmmoBar>();
@@ -24,12 +28,16 @@ public class Weapon_Shotgun : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && (timer > 2.0f))
+        if (Input.GetButtonDown("Fire1"))
         {
-            if(clip>0)
+            if(clip>0 && (timer > 2.0f))
             {
                 timer=0f;
                 clip-=1;
+                if(clip==0 && ammo>0)
+                {
+                    reload.Play();
+                }
                 ammoBar.SetAmmoClip(clip);
                 Shoot();
             }
@@ -38,7 +46,7 @@ public class Weapon_Shotgun : MonoBehaviour
         {
             Reload();
         }
-        if((ammo==0) && (clip==0))
+        if((ammo==0) && (clip==0) && timer>1f)
         {
             pistol.SetActive(true);
             Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
@@ -55,6 +63,7 @@ public class Weapon_Shotgun : MonoBehaviour
     }
     void Shoot()
     {
+        shoot.Play();
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(0f,0f,12f));
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(0f,0f,-12f));
@@ -62,17 +71,17 @@ public class Weapon_Shotgun : MonoBehaviour
     }
     void Reload()
     {
-        timer+=Time.deltaTime;
-        if(ammo<6 && timer>2f)
+        timerR+=Time.deltaTime;
+        if(ammo<6 && timerR>2f)
         {
-            timer=0;
+            timerR=0;
             clip=ammo;
             ammo=0;
             ammoBar.SetMaxAmmo(ammo,clip);
         }
-        if(ammo>=6 && timer>2f)
+        if(ammo>=6 && timerR>2f)
         {
-            timer=0;
+            timerR=0;
             clip=6;
             ammo = ammo-clip;
             ammoBar.SetMaxAmmo(ammo,clip);

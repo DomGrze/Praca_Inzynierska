@@ -65,4 +65,13 @@ public class PlayerMovement : MonoBehaviour
 		//Instantiate(deathEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);
 	}
+    public void HealDamage (int heal)
+	{
+		health += heal;
+        if(health>maxHealth)
+        {
+            health=maxHealth;
+        }
+        healthBar.SetHealth(health);
+	}
 }

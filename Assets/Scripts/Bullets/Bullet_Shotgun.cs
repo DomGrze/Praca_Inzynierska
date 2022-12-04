@@ -14,7 +14,6 @@ public class Bullet_Shotgun : MonoBehaviour
         rb.velocity = transform.right * speed;
         Destroy(gameObject, timeAlive);
     }
-
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
         Debug.Log(hitInfo.name);
@@ -24,8 +23,7 @@ public class Bullet_Shotgun : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
-
-        if (hitInfo.name != "Player" && hitInfo.name != "EnemyBullet(Clone)" && hitInfo.name != "Bullet_Shotgun(Clone)")
+        if (hitInfo.CompareTag("Enemy") || hitInfo.CompareTag("Ground"))
         {
             Destroy(gameObject);
         }
