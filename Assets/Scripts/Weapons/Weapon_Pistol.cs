@@ -11,7 +11,6 @@ public class Weapon_Pistol : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-    private GameObject pistol;
     private AudioSource shoot;
     public AudioSource reload;
     private float timer=1f;

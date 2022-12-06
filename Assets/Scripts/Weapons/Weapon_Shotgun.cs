@@ -5,9 +5,8 @@ using static AmmoBar;
 public class Weapon_Shotgun : MonoBehaviour
 {
     public Transform firePoint;
-    public Transform pistolPos;
     public GameObject bulletPrefab;
-    private GameObject pistol;
+    public GameObject pistol;
     private AmmoBar ammoBar;
     private AudioSource shoot;
     public AudioSource reload;
@@ -49,16 +48,12 @@ public class Weapon_Shotgun : MonoBehaviour
         if((ammo==0) && (clip==0) && timer>1f)
         {
             pistol.SetActive(true);
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             pistol.SetActive(true);
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
     }
     void Shoot()

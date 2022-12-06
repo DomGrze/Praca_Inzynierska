@@ -13,8 +13,7 @@ public class Pickup : MonoBehaviour
     private CinemachineVirtualCamera vcam;
     private GameObject weaponSpawn;
     private GameObject player;
-    public GameObject pistol;
-    private WeaponParent prevWeapon;
+    private GameObject pistol;
     private WeaponParent weaponParent;
     private void Start()
     {
@@ -30,8 +29,7 @@ public class Pickup : MonoBehaviour
             PickUp();
         }
         player = GameObject.FindGameObjectWithTag("Player");
-        prevWeapon = player.GetComponentInChildren<WeaponParent>();
-        weaponParent = prevWeapon.GetComponent<WeaponParent>();
+        weaponParent = player.GetComponentInChildren<WeaponParent>();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,7 +37,6 @@ public class Pickup : MonoBehaviour
         {
             pickupText.gameObject.SetActive(true);
             pickable = true;
-            pistol.SetActive(true);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -48,19 +45,22 @@ public class Pickup : MonoBehaviour
         {
             pickupText.gameObject.SetActive(false);
             pickable = false;
-            pistol.SetActive(false);
+            // pistol.SetActive(false);
         }
     }
     void PickUp()
     {
-        // pistol.SetActive(true);
-        Destroy(prevWeapon.gameObject);
+        pistol.SetActive(true);
         weaponSpawn = Instantiate(weapon.gameObject,weaponParent.transform.parent.position,weaponParent.transform.parent.rotation);
         weaponSpawn.gameObject.transform.SetParent(weaponParent.transform.parent);
-        //Destroy(gameObject); na czas testow nie usuwam podnoszonej broni
+        //Destroy(gameObject); //na czas testow nie usuwam podnoszonej broni
         if(vcam.m_Lens.OrthographicSize != 5f)
         {
             vcam.m_Lens.OrthographicSize = 5f;
+        }
+        if (weaponParent.gameObject.transform.childCount >= 2)
+        {
+            Destroy(weaponParent.gameObject);
         }
     }
 }

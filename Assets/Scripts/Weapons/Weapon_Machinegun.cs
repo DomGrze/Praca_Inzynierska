@@ -54,16 +54,12 @@ public class Weapon_Machinegun : MonoBehaviour
         if((ammo==0) && (clip==0))
         {
             pistol.SetActive(true);
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             pistol.SetActive(true);
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
     }
     void Shoot()

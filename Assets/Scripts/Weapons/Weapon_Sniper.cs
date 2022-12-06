@@ -8,7 +8,6 @@ public class Weapon_Sniper : MonoBehaviour
     private Camera Camera;
     private CinemachineVirtualCamera vcam;
     public Transform firePoint;
-    public Transform pistolPos;
     public GameObject bulletPrefab;
     private GameObject pistol;
     private AmmoBar ammoBar;
@@ -56,19 +55,15 @@ public class Weapon_Sniper : MonoBehaviour
         }
         if((ammo==0) && (clip==0) && timer>1f)
         {
-            pistol.SetActive(true);
             vcam.m_Lens.OrthographicSize = 5f;
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
+            pistol.SetActive(true);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             pistol.SetActive(true);
             vcam.m_Lens.OrthographicSize = 5f;
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
     }
     void Shoot()

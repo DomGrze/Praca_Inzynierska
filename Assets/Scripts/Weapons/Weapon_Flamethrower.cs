@@ -5,7 +5,6 @@ using UnityEngine;
 public class Weapon_Flamethrower : MonoBehaviour
 {
     public Transform firePoint;
-    public Transform pistolPos;
     public GameObject bulletPrefab;
     public GameObject pistol;
     private AmmoBar ammoBar;
@@ -40,16 +39,12 @@ public class Weapon_Flamethrower : MonoBehaviour
         if(clip<=0)
         {
             pistol.SetActive(true);
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             pistol.SetActive(true);
-            Instantiate(pistol, pistolPos.position, transform.rotation, transform.parent);
             Destroy(gameObject);
-            pistol.SetActive(false);
         }
     }
     void Shoot()
