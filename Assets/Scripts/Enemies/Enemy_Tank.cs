@@ -7,14 +7,12 @@ public class Enemy_Tank : MonoBehaviour {
 
 	private int health = 200;
 
-	public AIPath aiPath;
-	//public HealthBar healthBar;
-
-	//public GameObject deathEffect;
+	private AIPath aiPath;
+	private GameObject enemies;
 	void Start()
 	{
-		//healthBar.SetMaxHealth(health);
-		//healthBar.SetHealth(health);
+		enemies = GameObject.FindGameObjectWithTag("Enemies");
+		aiPath = enemies.GetComponent<AIPath>();
 	}
 
 	public void TakeDamage (int damage)

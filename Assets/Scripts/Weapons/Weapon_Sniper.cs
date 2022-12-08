@@ -34,7 +34,7 @@ public class Weapon_Sniper : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && (Time.timeScale != 0))
         {
             if(clip>0 && (timer > 1.7f))
             {

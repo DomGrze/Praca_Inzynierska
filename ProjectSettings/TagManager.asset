@@ -9,6 +9,7 @@ TagManager:
   - vcam
   - Enemy
   - Ground
+  - Enemies
   layers:
   - Default
   - TransparentFX

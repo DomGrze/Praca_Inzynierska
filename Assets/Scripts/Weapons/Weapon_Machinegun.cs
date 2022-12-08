@@ -28,7 +28,7 @@ public class Weapon_Machinegun : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && (Time.timeScale != 0))
         {
             if(clip>0 && timer > 0.15f)
             {

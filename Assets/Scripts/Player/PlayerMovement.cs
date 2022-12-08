@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private bool doubleJump=false;
     public Animator animator;
     public HealthBar healthBar;
+    public GameObject deathMenu;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -62,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
 	}
     void Die ()
 	{
-		//Instantiate(deathEffect, transform.position, Quaternion.identity);
-		Destroy(gameObject);
+        Time.timeScale = 0f;
+        deathMenu.SetActive(true);
 	}
     public void HealDamage (int heal)
 	{

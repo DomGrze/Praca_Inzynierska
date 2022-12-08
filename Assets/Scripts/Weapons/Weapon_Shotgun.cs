@@ -27,7 +27,7 @@ public class Weapon_Shotgun : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && (Time.timeScale != 0))
         {
             if(clip>0 && (timer > 2.0f))
             {

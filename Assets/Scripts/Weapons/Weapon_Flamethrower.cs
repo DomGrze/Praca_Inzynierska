@@ -23,7 +23,7 @@ public class Weapon_Flamethrower : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse0) && (Time.timeScale != 0))
         {
             if(clip>0)
             {

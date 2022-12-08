@@ -26,12 +26,12 @@ public class Weapon_Pistol : MonoBehaviour
     {
         shoot = GetComponent<AudioSource>();
         ammoBar = Object.FindObjectOfType<AmmoBar>();
-        ammoBar.SetMaxAmmo(ammo, clip);
     }
     void Update()
     {
+        ammoBar.SetMaxAmmo(ammo, clip);
         timer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && (timer > 0.9f))
+        if (Input.GetButtonDown("Fire1") && (timer > 0.9f) && (Time.timeScale != 0))
         {
             if(clip>0)
             {

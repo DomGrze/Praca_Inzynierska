@@ -45,7 +45,6 @@ public class Pickup : MonoBehaviour
         {
             pickupText.gameObject.SetActive(false);
             pickable = false;
-            // pistol.SetActive(false);
         }
     }
     void PickUp()
