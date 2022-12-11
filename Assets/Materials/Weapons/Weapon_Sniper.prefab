@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 269355895084621847}
-  bulletPrefab: {fileID: 6006454455085018069, guid: 4d20bdb9d928fb245b5e11f44e837f12, type: 3}
+  bulletPrefab: {fileID: 6761387043488946487, guid: 4d20bdb9d928fb245b5e11f44e837f12, type: 3}
   reload: {fileID: 1071209071883567239}
 --- !u!82 &-1323025289226509388
 AudioSource:
@@ -250,7 +250,7 @@ AudioSource:
   m_GameObject: {fileID: 269355894677615645}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 4e547606deb2c40438572105fccded65, type: 2}
   m_audioClip: {fileID: 8300000, guid: d23c93aff2bc3b34ca6d5a9641abe0ef, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

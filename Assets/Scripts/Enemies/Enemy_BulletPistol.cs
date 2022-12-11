@@ -11,7 +11,7 @@ public class Enemy_BulletPistol : MonoBehaviour
 
     private int damage = 25;//obrażenia pocisku
 
-    private float timeAlive = 2f;//max czas lotu pocisku
+    private float timeAlive = 1f;//max czas lotu pocisku
 
     void Start()
     {
@@ -38,10 +38,10 @@ public class Enemy_BulletPistol : MonoBehaviour
             player.TakeDamage(damage);//gdy pocisk zderzy się z graczem zadaje mu obrażenia
         }
         
-        // if (hitInfo.name != "Enemy_Tank" && hitInfo.name != "EnemyBullet(Clone)" && hitInfo.name != "Bullet_Pistol(Clone)")
-        // {
-        //     Destroy(gameObject);
-        // }
+        if (hitInfo.CompareTag("Player") || hitInfo.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()

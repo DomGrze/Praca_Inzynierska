@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    private float force = 16f;
+    private float force = 18f;
     private void OnCollisionEnter2D(Collision2D other) 
     {
         if (other.gameObject.CompareTag("Player"))

@@ -8,7 +8,7 @@ public class Enemy_BulletMachinegun : MonoBehaviour
     private Rigidbody2D rb;
     private float speed = 20f;//szybkość pocisku
     private int damage = 15;//obrażenia pocisku
-    private float timeAlive = 3f;//max czas lotu pocisku
+    private float timeAlive = 1.5f;//max czas lotu pocisku
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,9 +26,9 @@ public class Enemy_BulletMachinegun : MonoBehaviour
         {
             player.TakeDamage(damage);//gdy pocisk zderzy się z graczem zadaje mu obrażenia
         }
-        // if (hitInfo.CompareTag("Player") || hitInfo.CompareTag("Ground"))
-        // {
-        //     Destroy(gameObject);
-        // }
+        if (hitInfo.CompareTag("Player") || hitInfo.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

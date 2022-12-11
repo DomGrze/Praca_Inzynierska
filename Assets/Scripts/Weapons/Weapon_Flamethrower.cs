@@ -27,7 +27,7 @@ public class Weapon_Flamethrower : MonoBehaviour
         {
             if(clip>0)
             {
-                //clip-=1;
+                clip-=1;
                 ammoBar.SetMaxAmmo(ammo,clip);
                 Shoot();
             }

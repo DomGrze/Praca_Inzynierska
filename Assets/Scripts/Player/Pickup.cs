@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class Pickup : MonoBehaviour
 {
@@ -52,7 +53,10 @@ public class Pickup : MonoBehaviour
         pistol.SetActive(true);
         weaponSpawn = Instantiate(weapon.gameObject,weaponParent.transform.parent.position,weaponParent.transform.parent.rotation);
         weaponSpawn.gameObject.transform.SetParent(weaponParent.transform.parent);
-        //Destroy(gameObject); //na czas testow nie usuwam podnoszonej broni
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            Destroy(gameObject);
+        }
         if(vcam.m_Lens.OrthographicSize != 5f)
         {
             vcam.m_Lens.OrthographicSize = 5f;

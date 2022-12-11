@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3920672997638097243}
-  bulletPrefab: {fileID: 1757430287981048977, guid: 235596b7660d0814b9aa7474d130a4eb, type: 3}
+  bulletPrefab: {fileID: 793431027510759749, guid: 235596b7660d0814b9aa7474d130a4eb, type: 3}
   reload: {fileID: -2840679457966253996}
 --- !u!82 &9050608277967434323
 AudioSource:

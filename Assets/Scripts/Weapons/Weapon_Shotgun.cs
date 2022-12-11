@@ -20,8 +20,8 @@ public class Weapon_Shotgun : MonoBehaviour
         pistol = GameObject.FindGameObjectWithTag("Pistol");
         pistol.SetActive(false);
         ammoBar = Object.FindObjectOfType<AmmoBar>();
-        ammo = 1;
-        clip = 1;
+        ammo = 24;
+        clip = 6;
         ammoBar.SetMaxAmmo(ammo,clip);
     }
     void Update()

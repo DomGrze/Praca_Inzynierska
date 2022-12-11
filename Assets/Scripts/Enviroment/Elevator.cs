@@ -33,7 +33,7 @@ public class Elevator : MonoBehaviour
         {
             if (other.transform.position.y > transform.position.y)//tylko gdy gracz będzie na górze platformy
             {
-                movementSpeed = 2;//platforma porusza się tylko kiedy gracz na niej stoi
+                movementSpeed = 4;//platforma porusza się tylko kiedy gracz na niej stoi
                 //other.transform.SetParent(transform);//ustawiamy platforme jako parent gracza
             }
         }
