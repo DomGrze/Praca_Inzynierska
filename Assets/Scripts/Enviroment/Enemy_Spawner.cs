@@ -9,6 +9,7 @@ public class Enemy_Spawner : MonoBehaviour
     private bool spawnable;
     public GameObject enemy;
     private GameObject player;
+    private int child;
     private GameObject enemies;
     private GameObject enemySpawn;
     private Vector2 spawnPoint;
@@ -24,6 +25,7 @@ public class Enemy_Spawner : MonoBehaviour
             Spawn();
         }
         spawnPoint = player.transform.position + new Vector3(6,2,0);
+        child = enemies.transform.childCount;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -43,6 +45,10 @@ public class Enemy_Spawner : MonoBehaviour
     }
     void Spawn()
     {
+        for ( int i=0;i<child;i++)
+        {
+            Destroy(enemies.transform.GetChild(i).gameObject);//niszczę wrogów którzy nie zostali zabici przed zespawnowaniem nowych
+        }
         enemySpawn = Instantiate(enemy,spawnPoint,gameObject.transform.rotation);
         enemies.transform.position = enemySpawn.transform.position;
         enemySpawn.gameObject.transform.SetParent(enemies.transform);

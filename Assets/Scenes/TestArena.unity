@@ -5267,6 +5267,10 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 6585172565321203928, guid: a6a929f72c3cd0043a7d3661b0d8afc6, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6585172565321203930, guid: a6a929f72c3cd0043a7d3661b0d8afc6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
