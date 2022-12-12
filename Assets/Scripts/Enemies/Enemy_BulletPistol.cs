@@ -43,9 +43,4 @@ public class Enemy_BulletPistol : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    void Update()
-    {
-        
-    }
 }

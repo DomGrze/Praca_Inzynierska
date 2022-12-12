@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6609206082597732566}
   - component: {fileID: 6453760747145850762}
   - component: {fileID: 1748188018712212661}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: JumpPad
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

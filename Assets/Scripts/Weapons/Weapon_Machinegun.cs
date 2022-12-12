@@ -5,7 +5,6 @@ using UnityEngine;
 public class Weapon_Machinegun : MonoBehaviour
 {
     public Transform firePoint;
-    public Transform pistolPos;
     public GameObject bulletPrefab;
     private GameObject pistol;
     private AmmoBar ammoBar;

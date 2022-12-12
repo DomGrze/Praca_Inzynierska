@@ -8,6 +8,7 @@ public class Enemy_Spawnpoint : MonoBehaviour
     public GameObject enemy;
     private GameObject player;
     public int Amount=1;
+    private int child;
     private GameObject enemies;
     private GameObject enemySpawn;
     private Vector2 spawnPoint;
@@ -20,6 +21,7 @@ public class Enemy_Spawnpoint : MonoBehaviour
     private void Update()
     {
         spawnPoint = player.transform.position + new Vector3(20,5,0);
+        child = enemies.transform.childCount;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,6 +35,10 @@ public class Enemy_Spawnpoint : MonoBehaviour
     }
     void Spawn()
     {
+        for ( int i=0;i<child;i++)
+        {
+            Destroy(enemies.transform.GetChild(i).gameObject);//niszczę wrogów którzy nie zostali zabici przed zespawnowaniem nowych
+        }
         enemySpawn = Instantiate(enemy,spawnPoint,gameObject.transform.rotation);
         enemies.transform.position = enemySpawn.transform.position;
         enemySpawn.gameObject.transform.SetParent(enemies.transform);

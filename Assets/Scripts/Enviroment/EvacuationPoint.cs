@@ -9,8 +9,11 @@ public class EvacuationPoint : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        winMenu.SetActive(true);
-        Time.timeScale = 0f;
+        if(other.CompareTag("Player"))
+        {
+            winMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
     public void LoadMenu()
     {

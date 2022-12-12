@@ -20,7 +20,7 @@ public class Enemy_Shotgun : MonoBehaviour
 
         float distance = UnityEngine.Vector2.Distance(transform.position, player.transform.position);//sprawdzamy odległość przeciwnika od gracza
 
-        if(distance<5)//jeśli przeciwnik znajduje się w takiej odległości od gracza, może strzelać
+        if(distance<6.5)//jeśli przeciwnik znajduje się w takiej odległości od gracza, może strzelać
         {
             timer += Time.deltaTime;//liczenie czasu pomiędzy kolejnymi strzałami
 

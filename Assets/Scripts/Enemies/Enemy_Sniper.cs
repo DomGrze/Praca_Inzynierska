@@ -8,7 +8,7 @@ public class Enemy_Sniper : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
     private AudioSource shoot;
-    private float timer=0f;
+    private float timer=0.5f;
     void Start()
     {
         shoot = GetComponent<AudioSource>();
