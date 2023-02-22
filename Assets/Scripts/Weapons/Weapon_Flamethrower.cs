@@ -16,7 +16,7 @@ public class Weapon_Flamethrower : MonoBehaviour
         pistol = GameObject.FindGameObjectWithTag("Pistol");
         pistol.SetActive(false);
         ammoBar = Object.FindObjectOfType<AmmoBar>();
-        ammo = 999;
+        ammo = 0;
         clip = 999;
         ammoBar.SetMaxAmmo(ammo,clip);
     }

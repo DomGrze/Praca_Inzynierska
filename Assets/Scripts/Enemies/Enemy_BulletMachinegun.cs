@@ -7,8 +7,13 @@ public class Enemy_BulletMachinegun : MonoBehaviour
     private GameObject player;
     private Rigidbody2D rb;
     private float speed = 20f;//szybkość pocisku
+<<<<<<< Updated upstream
     private int damage = 15;//obrażenia pocisku
     private float timeAlive = 3f;//max czas lotu pocisku
+=======
+    private int damage = 10;//obrażenia pocisku
+    private float timeAlive = 1.5f;//max czas lotu pocisku
+>>>>>>> Stashed changes
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

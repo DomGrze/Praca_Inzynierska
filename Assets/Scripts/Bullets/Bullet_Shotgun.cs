@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet_Shotgun : MonoBehaviour
 {
     private float speed = 10f;
-    private int damage = 25;
+    private int damage = 35;
     private Rigidbody2D rb;
     private float timeAlive = 0.5f;
     void Start()
